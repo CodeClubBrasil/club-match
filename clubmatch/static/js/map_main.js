@@ -113,9 +113,20 @@ function createLocationMarker(map, location) {
   });
 }
 
+function toggleLoading() {
+  let loading = document.getElementById('loading');
+  if (loading.style.display === "none" || loading.style.display == "") {
+    loading.style.display = "block";
+  } else {
+    loading.style.display = "none";
+  }
+}
+
 function initMap() {
   default_location = { lat: -15.6857596, lng: -47.6843683 }; // Planaltina, Brasília/DF
   var real_location;
+
+  toggleLoading();
 
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(
@@ -133,18 +144,20 @@ function initMap() {
     event.preventDefault();
     search = document.getElementById('search').value;
 
+    toggleLoading();
+
     for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(null);
     }
     markers = [];
 
     getClubs(search, function(clubs) {
+      toggleLoading();
       clubs.forEach((club) => createGoogleMapMarker(map, club, new google.maps.InfoWindow));
       // var markerCluster = new MarkerClusterer(map, markers, markers_options);
     });
   });
 
-  
   buildMap(default_location, false, '');
 }
 
@@ -162,6 +175,7 @@ function buildMap(location, is_real_location, query) {
   }
 
   getClubs(query, function(clubs) {
+    toggleLoading();
     clubs.forEach((club) => createGoogleMapMarker(map, club, infowindow));
     // var markerCluster = new MarkerClusterer(map, markers, markers_options);
   });
