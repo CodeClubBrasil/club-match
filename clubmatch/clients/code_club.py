@@ -1,10 +1,11 @@
 import requests
+import os
 
 
 class CodeClubClient:
     # Documentation:
     # https://codeclubworldapiv2.docs.apiary.io/
-    TOKEN = 'RObf83e126283b38f1e512429cb4539ab360aabda9f41682348af5a8aed530c2aa'
+    TOKEN = os.getenv('CC_API_TOKEN', '')
     HOST = 'https://api.codeclubworld.org'
 
     def _get_auth_headers(self):

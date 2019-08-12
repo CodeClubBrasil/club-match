@@ -11,6 +11,11 @@ This API doens't have any parameter to search for clubs by address info, then we
 >= Python3.7
 
 
+### Config env vars
+
+- CC_API_TOKEN
+
+
 ```
 pip install -r requirements.txt
 ```
